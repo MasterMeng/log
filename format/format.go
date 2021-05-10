@@ -1,8 +1,7 @@
-package main
+package format
 
 import (
 	"fmt"
-	"os"
 	"path/filepath"
 	"strings"
 	"time"
@@ -41,37 +40,4 @@ func (l *LogFormatter) Format(entry *logrus.Entry) ([]byte, error) {
 		return []byte(fmt.Sprintf("%s: %s\n", cyan(prefix), entry.Message)), nil
 	}
 
-}
-
-func main() {
-	// now := time.Now()
-	// for i := 1; i < 10000; i++ {
-	// 	LogrusFunc(true)
-	// }
-	// fmt.Println(time.Since(now))
-
-	now := time.Now()
-	for i := 1; i < 10000; i++ {
-		LogrusFunc(true)
-	}
-	fmt.Println(time.Since(now))
-}
-
-func LogrusFunc(caller bool) {
-	log := logrus.New()
-
-	log.SetFormatter(new(LogFormatter))
-	log.SetLevel(logrus.TraceLevel)
-	log.SetReportCaller(caller)
-	log.Out = os.Stdout
-
-	log.Error("error test")
-	log.Debug("debug test")
-	log.Debugln("debug test")
-	log.Info("info test")
-	log.Infof("info %s\n", "test")
-	log.Warn("warn test")
-	// log.Trace("trace test")
-	// log.Panic("panic test")
-	// log.Fatal("fatal test")
 }
